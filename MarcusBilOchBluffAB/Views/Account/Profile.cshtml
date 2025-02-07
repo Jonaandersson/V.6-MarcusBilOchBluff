@@ -1,0 +1,78 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "Mina Sidor";
+}
+
+<h2>Mina Sidor</h2>
+
+<h3>Kommande bokningar</h3>
+@if (Model.UpcomingBookings.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bil</th>
+                <th>Startdatum</th>
+                <th>Slutdatum</th>
+                <th>Pris per dag</th>
+                <th>Totalt pris</th>
+                <th>Avboka</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.UpcomingBookings)
+            {
+                <tr>
+                    <td>@booking.Car.Make @booking.Car.Model</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.ToShortDateString()</td>
+                    <td>@booking.Car.PricePerDay kr</td>
+                    <td>@(booking.Car.PricePerDay * (booking.EndDate - booking.StartDate).Days) kr</td>
+                    <td>
+                        <form asp-controller="Account" asp-action="CancelBooking" method="post">
+                            <input type="hidden" name="bookingId" value="@booking.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Avboka</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Inga kommande bokningar.</p>
+}
+
+<h3>Tidigare bokningar</h3>
+@if (Model.PastBookings.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bil</th>
+                <th>Startdatum</th>
+                <th>Slutdatum</th>
+                <th>Pris per dag</th>
+                <th>Totalt pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.PastBookings)
+            {
+                <tr>
+                    <td>@booking.Car.Make @booking.Car.Model</td>
+                    <td>@booking.StartDate.ToShortDateString()</td>
+                    <td>@booking.EndDate.ToShortDateString()</td>
+                    <td>@booking.Car.PricePerDay kr</td>
+                    <td>@(booking.Car.PricePerDay * (booking.EndDate - booking.StartDate).Days) kr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Inga tidigare bokningar.</p>
+}

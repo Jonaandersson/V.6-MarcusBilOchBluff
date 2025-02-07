@@ -1,0 +1,42 @@
+﻿@model Car
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Book your Car</h2>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center">No car found.</div>
+    }
+    else
+    {
+        @if (Context.Session.GetInt32("CustomerId") == null)
+        {
+            <!-- Om användaren INTE är inloggad -->
+            <div class="alert alert-info text-center">
+                <p>You need to log in to book a car.</p>
+                <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("BookCar", "Home", new { carId = Model.Id }) })" class="btn btn-primary">
+                    Log in
+                </a>
+            </div>
+        }
+        else
+        {
+            <!-- Om användaren ÄR inloggad -->
+            <form method="post" action="@Url.Action("BookCar", "Home")" class="card shadow-lg p-4">
+                <input type="hidden" name="carId" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label for="startDate" class="form-label">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="endDate" class="form-label">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+            </form>
+        }
+    }
+</div>

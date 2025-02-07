@@ -1,0 +1,34 @@
+﻿<h2>Manage Bookings</h2>
+
+<!-- Glöm inte denna knapp på de andra -->
+<a href="@Url.Action("CreateBooking", "Booking")" class="btn btn-primary">Add New Booking</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+                <tr>
+                    <td>@booking.StartDate</td>
+                    <td>@booking.EndDate</td>
+                    <td>
+                        
+                        <a href="@Url.Action("EditBooking", "Booking", new { id = booking.Id })" class="btn btn-warning">Edit</a> |
+
+                        
+                        <a href="@Url.Action("DeleteBooking", "Booking", new { id = booking.Id })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>
+</div>

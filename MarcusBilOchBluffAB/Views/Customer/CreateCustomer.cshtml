@@ -1,0 +1,18 @@
+﻿@model CustomerViewModel
+
+<h1>Create Customer</h1>
+
+<form asp-action="CreateCustomer" method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<div>
+    <a asp-action="ManageCustomers" asp-controller="Admin">Back to List</a>
+</div>

@@ -1,0 +1,31 @@
+﻿<h2>Manage Customers</h2>
+
+<!-- Knapp för att skapa en ny kund -->
+<a href="@Url.Action("CreateCustomer", "Customer")" class="btn btn-primary">Create New Customer</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Email</td>
+                <td>
+                    <!-- Länk för att redigera kund -->
+                    <a href="@Url.Action("EditCustomer", "Customer", new { id = customer.Id })" class="btn btn-warning">Edit</a> |
+
+                    <!-- Länk för att ta bort kund -->
+                    <a href="@Url.Action("DeleteCustomer", "Customer", new { id = customer.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>
+</div>

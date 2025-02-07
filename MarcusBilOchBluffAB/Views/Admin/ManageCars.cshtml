@@ -1,0 +1,36 @@
+﻿<h2>Manage Cars</h2>
+
+
+<a href="@Url.Action("CreateCar", "Admin")" class="btn btn-primary">Add New Car</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Price per Day</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Make</td>
+                <td>@car.Model</td>
+                <td>@car.PricePerDay</td>
+                <td>
+                    
+                    <a href="@Url.Action("EditCar", "Admin", new { id = car.Id })" class="btn btn-warning">Edit</a> |
+
+                    
+                    <a href="@Url.Action("DeleteCar", "Admin", new { id = car.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>
+</div>

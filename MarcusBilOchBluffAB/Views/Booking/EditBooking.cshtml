@@ -1,0 +1,65 @@
+﻿@model MarcusBilOchBluffAB.Models.BookingViewModel
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h1>Edit Booking</h1>
+
+<h4>BookingViewModel</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditBooking" asp-controller="Booking" asp-route-id="@Model.Id">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <!-- Start Date (User can edit) -->
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <!-- End Date (User can edit) -->
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" type="date" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <!-- Is Confirmed (User can edit) -->
+            <div class="form-group">
+                <label asp-for="IsConfirmed" class="control-label"></label>
+                <input type="checkbox" asp-for="IsConfirmed" />
+                <span asp-validation-for="IsConfirmed" class="text-danger"></span>
+            </div>
+
+            <!-- Hidden CarId (No need for user input, hidden field) -->
+            <input type="hidden" asp-for="CarId" />
+
+            <!-- Hidden CustomerId (No need for user input, hidden field) -->
+            <input type="hidden" asp-for="CustomerId" />
+
+            <!-- Hidden Id (Hidden field for the booking ID) -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ManageBookings" asp-controller="Admin">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

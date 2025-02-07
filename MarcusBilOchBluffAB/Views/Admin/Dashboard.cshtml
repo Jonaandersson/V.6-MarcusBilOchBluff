@@ -1,0 +1,19 @@
+﻿@model MarcusBilOchBluffAB.Models.AdminDashboardViewModel
+
+<h2>Admin Dashboard</h2>
+<p>Welcome to the Admin Panel</p>
+
+<div class="card p-3">
+    <h4>Manage Sections</h4>
+    <div class="d-flex flex-column gap-2">
+        <a href="@Url.Action("ManageCars", "Admin")" class="btn btn-primary">Manage Cars (@Model.Cars?.Count() ?? 0)</a>
+        <a href="@Url.Action("ManageBookings", "Admin")" class="btn btn-primary">Manage Bookings (@Model.Bookings?.Count() ?? 0)</a>
+        <a href="@Url.Action("ManageCustomers", "Admin")" class="btn btn-primary">Manage Customers (@Model.Customers?.Count() ?? 0)</a>
+    </div>
+</div>
+
+<div class="mt-3">
+    <form method="post" action="@Url.Action("Logout", "Admin")">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+</div>
